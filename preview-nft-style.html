@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Design Preview — NFT Style · Patron</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #020203;
+  --bg-card: #0C0C10;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(0,232,255,0.40);
+  --fg: #F3F2F8;
+  --muted: rgba(243,242,248,0.44);
+  --muted-strong: rgba(243,242,248,0.70);
+  --brand: #00E8FF;
+  --brand-glow: rgba(0,232,255,0.35);
+  --brand-soft: rgba(0,232,255,0.08);
+  --brand-line: rgba(0,232,255,0.26);
+  --pos: #39EF9E;
+  --shadow: 0 24px 60px -18px rgba(0,0,0,0.96);
+  --radius: 20px;
+  --font-d: 'Space Grotesk', sans-serif;
+  --font-ui: 'Hanken Grotesk', sans-serif;
+  --font-m: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Preview notice */
+.preview-banner {
+  background: var(--brand);
+  color: #000;
+  font-family: var(--font-m);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.page {
+  padding: 44px 28px 96px;
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+}
+/* subtle radial glows */
+.page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(60% 50% at 80% 8%,  rgba(0,232,255,0.07) 0%, transparent 70%),
+    radial-gradient(45% 40% at 10% 92%, rgba(0,232,255,0.04) 0%, transparent 72%);
+}
+.page > * { position: relative; z-index: 1; }
+
+/* ===================== HEADER ===================== */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.header-left h1 {
+  font-family: var(--font-d);
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.header-left p {
+  font-family: var(--font-m);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.theme-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted-strong);
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+.theme-pill.active {
+  border-color: var(--brand-line);
+  background: var(--brand-soft);
+  color: var(--fg);
+}
+.swatch {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.profile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--brand-line);
+  background: var(--brand-soft);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg);
+  cursor: pointer;
+}
+.profile-avatar {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #000;
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 11px;
+  display: grid;
+  place-items: center;
+}
+
+/* ===================== TICKER ===================== */
+.ticker-bar {
+  background: rgba(0,232,255,0.05);
+  border: 1px solid rgba(0,232,255,0.13);
+  border-radius: 999px;
+  padding: 9px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+  overflow: hidden;
+}
+.ticker-lead {
+  font-family: var(--font-m);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--brand);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  padding-right: 14px;
+  border-right: 1px solid rgba(0,232,255,0.2);
+}
+.ticker-pulse {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 8px var(--brand);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.28;} }
+.ticker-items {
+  display: flex;
+  gap: 22px;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0, black 4%, black 94%, transparent 100%);
+  flex: 1;
+}
+.ticker-chip {
+  font-family: var(--font-m);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-strong);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ticker-chip b {
+  color: var(--brand);
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+/* ===================== SECTION HEADERS ===================== */
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+.section-eyebrow {
+  font-family: var(--font-m);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--brand);
+  margin-bottom: 5px;
+}
+.section-title {
+  font-family: var(--font-d);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--brand-line);
+  background: var(--brand-soft);
+  color: var(--brand);
+  font-family: var(--font-m);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.view-all-btn:hover { background: rgba(0,232,255,0.14); }
+
+/* ===================== VITALS FEATURED ===================== */
+.vitals-featured {
+  border: 1px solid var(--brand-line);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  overflow: hidden;
+  margin-bottom: 48px;
+  box-shadow: 0 0 70px -28px var(--brand-glow), var(--shadow);
+  display: flex;
+}
+@media (max-width: 680px) { .vitals-featured { flex-direction: column; } }
+
+.vitals-visual {
+  flex: 0 0 260px;
+  background: linear-gradient(155deg, #000E12 0%, #002230 45%, #003A48 75%, rgba(0,232,255,0.12) 100%);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+}
+@media (max-width: 680px) { .vitals-visual { flex: none; min-height: 160px; } }
+.vitals-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(55% 55% at 50% 50%, rgba(0,232,255,0.16) 0%, transparent 70%);
+}
+/* grid lines texture */
+.vitals-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,232,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,232,255,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+.vitals-ring {
+  position: relative;
+  z-index: 1;
+  width: 112px; height: 112px;
+  border-radius: 50%;
+  border: 8px solid rgba(0,232,255,0.15);
+  box-shadow: 0 0 0 1px rgba(0,232,255,0.08), 0 0 36px rgba(0,232,255,0.2), inset 0 0 22px rgba(0,232,255,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+/* arc overlay */
+.vitals-ring-arc {
+  position: absolute;
+  z-index: 2;
+  width: 112px; height: 112px;
+  border-radius: 50%;
+  border: 8px solid transparent;
+  border-top-color: var(--brand);
+  border-right-color: var(--brand);
+  border-bottom-color: rgba(0,232,255,0.3);
+  filter: drop-shadow(0 0 6px var(--brand));
+  transform: rotate(-60deg);
+}
+.vitals-ring-num {
+  font-family: var(--font-d);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--brand);
+  line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(0,232,255,0.7));
+  font-variant-numeric: tabular-nums;
+}
+.vitals-ring-unit { font-size: 1rem; color: rgba(0,232,255,0.7); }
+.vitals-ring-cap {
+  font-family: var(--font-m);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(0,232,255,0.55);
+}
+.vitals-body {
+  flex: 1;
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.vitals-label {
+  font-family: var(--font-m);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--brand);
+}
+.vitals-heading {
+  font-family: var(--font-d);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.vitals-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  flex: 1;
+}
+@media (max-width: 500px) { .vitals-metrics { grid-template-columns: repeat(2, 1fr); } }
+.vm { display: flex; flex-direction: column; gap: 3px; }
+.vm-label {
+  font-family: var(--font-m);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+.vm-val {
+  font-family: var(--font-d);
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+.vm-val.c { color: var(--brand); filter: drop-shadow(0 0 6px rgba(0,232,255,0.45)); }
+.vitals-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--brand-line);
+  background: var(--brand-soft);
+  font-family: var(--font-m);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--brand);
+}
+.live-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 6px var(--brand);
+}
+.btn-ghost {
+  margin-left: auto;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.08); }
+
+/* ===================== NFT CARD GRID ===================== */
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+@media (max-width: 900px) { .nft-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .nft-grid { grid-template-columns: 1fr; } }
+
+.nft-card {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--fg);
+  box-shadow: var(--shadow);
+  display: block;
+  transition: border-color 220ms, transform 220ms, box-shadow 220ms;
+  cursor: pointer;
+}
+.nft-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 0 42px -14px var(--brand-glow), var(--shadow);
+}
+
+/* Art area — ~55% card visual */
+.card-art {
+  height: 148px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+/* subtle scan-line texture overlay */
+.card-art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(0,0,0,0.18) 3px,
+    rgba(0,0,0,0.18) 4px
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+/* fade bottom into card body */
+.card-art::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(to top, var(--bg-card), transparent);
+  z-index: 2;
+}
+.card-emoji {
+  font-size: 46px;
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 6px 28px rgba(0,0,0,0.7));
+  transition: transform 220ms;
+}
+.nft-card:hover .card-emoji { transform: scale(1.1) translateY(-2px); }
+
+/* per-card art gradients */
+.art-finance  { background: linear-gradient(145deg, #0C1000 0%, #1A2200 45%, #233000 80%, #1F2F00 100%); }
+.art-gym      { background: linear-gradient(145deg, #150800 0%, #251200 45%, #381B00 80%, #2E1500 100%); }
+.art-supps    { background: linear-gradient(145deg, #0B0518 0%, #160840 50%, #1E0A5C 80%, #160940 100%); }
+.art-fitness  { background: linear-gradient(145deg, #001014 0%, #002030 50%, #003040 80%, #002A38 100%); }
+.art-water    { background: linear-gradient(145deg, #000C1C 0%, #001E40 50%, #002E60 80%, #002555 100%); }
+.art-creator  { background: linear-gradient(145deg, #140008 0%, #280015 50%, #3A001E 80%, #2E0018 100%); }
+.art-goals    { background: linear-gradient(145deg, #100C00 0%, #201800 50%, #2E2400 80%, #241C00 100%); }
+.art-progress { background: linear-gradient(145deg, #001A10 0%, #002C1C 50%, #004028 80%, #003520 100%); }
+.art-macros   { background: linear-gradient(145deg, #120800 0%, #201000 50%, #2C1800 80%, #221200 100%); }
+
+/* inner ambient glow per card */
+.art-finance  { box-shadow: inset 0 0 50px rgba(180,220,0,0.07); }
+.art-gym      { box-shadow: inset 0 0 50px rgba(255,140,0,0.08); }
+.art-supps    { box-shadow: inset 0 0 50px rgba(139,100,255,0.09); }
+.art-fitness  { box-shadow: inset 0 0 50px rgba(0,232,255,0.07); }
+.art-water    { box-shadow: inset 0 0 50px rgba(0,140,255,0.08); }
+.art-creator  { box-shadow: inset 0 0 50px rgba(255,60,120,0.08); }
+.art-goals    { box-shadow: inset 0 0 50px rgba(255,200,0,0.07); }
+.art-progress { box-shadow: inset 0 0 50px rgba(60,240,160,0.07); }
+.art-macros   { box-shadow: inset 0 0 50px rgba(255,160,0,0.07); }
+
+/* Card body */
+.card-body {
+  padding: 14px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.card-name {
+  font-family: var(--font-d);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.card-tag {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.card-stat-label {
+  font-family: var(--font-m);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.card-stat-value {
+  font-family: var(--font-d);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--brand);
+  letter-spacing: -0.01em;
+}
+.card-arrow {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: background 200ms, border-color 200ms, color 200ms;
+}
+.nft-card:hover .card-arrow {
+  background: var(--brand-soft);
+  border-color: var(--brand-line);
+  color: var(--brand);
+}
+</style>
+</head>
+<body>
+
+<div class="preview-banner">⬡ DESIGN PREVIEW — approve to apply · not the live dashboard</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <h1>Tom</h1>
+      <p>Your dashboard · everything in one place</p>
+    </div>
+    <div class="header-controls">
+      <div style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:999px;padding:3px;gap:2px;">
+        <button class="theme-pill active" style="border:0;background:var(--brand-soft);">
+          <span class="swatch" style="background:#00E8FF;box-shadow:0 0 0 2px #020203,0 0 0 3px #00E8FF;"></span>
+          Nocturne
+        </button>
+        <button class="theme-pill" style="border:0;">
+          <span class="swatch" style="background:linear-gradient(135deg,#8B7BFF,#4FE3D0);"></span>
+          Aurora
+        </button>
+        <button class="theme-pill" style="border:0;">
+          <span class="swatch" style="background:#6A45FF;"></span>
+          Daylight
+        </button>
+      </div>
+      <button class="profile-chip">
+        <span class="profile-avatar">T</span>
+        Tom
+      </button>
+      <button class="profile-chip" style="padding:8px 12px;font-size:16px;gap:0;">⚙</button>
+    </div>
+  </header>
+
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-lead">
+      <span class="ticker-pulse"></span>
+      Tom · Live
+    </div>
+    <div class="ticker-items">
+      <span class="ticker-chip">REC<b>76%</b></span>
+      <span class="ticker-chip">SLP<b>7h42</b></span>
+      <span class="ticker-chip">HRV<b>58ms</b></span>
+      <span class="ticker-chip">RHR<b>52bpm</b></span>
+      <span class="ticker-chip">H₂O<b>4 drinks</b></span>
+      <span class="ticker-chip">SUP<b>5/7</b></span>
+      <span class="ticker-chip">NET<b>CHF 12,400</b></span>
+      <span class="ticker-chip">STR<b>14.2</b></span>
+    </div>
+  </div>
+
+  <!-- VITALS -->
+  <div style="margin-bottom:48px;">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Today's vitals</div>
+        <div class="section-title">Recovery Overview</div>
+      </div>
+      <button class="view-all-btn">Update ↗</button>
+    </div>
+    <div class="vitals-featured">
+      <div class="vitals-visual">
+        <div class="vitals-ring">
+          <div class="vitals-ring-arc"></div>
+          <div class="vitals-ring-num">76<span class="vitals-ring-unit">%</span></div>
+          <div class="vitals-ring-cap">Recovery</div>
+        </div>
+      </div>
+      <div class="vitals-body">
+        <div class="vitals-label">Whoop · Today</div>
+        <div class="vitals-heading">Good Recovery</div>
+        <div class="vitals-metrics">
+          <div class="vm">
+            <div class="vm-label">Sleep</div>
+            <div class="vm-val">7h42</div>
+          </div>
+          <div class="vm">
+            <div class="vm-label">HRV</div>
+            <div class="vm-val c">58ms</div>
+          </div>
+          <div class="vm">
+            <div class="vm-label">Resting HR</div>
+            <div class="vm-val">52bpm</div>
+          </div>
+          <div class="vm">
+            <div class="vm-label">Strain</div>
+            <div class="vm-val">14.2</div>
+          </div>
+          <div class="vm">
+            <div class="vm-label">In bed</div>
+            <div class="vm-val" style="font-size:0.9rem;">23:15 → 07:06</div>
+          </div>
+          <div class="vm">
+            <div class="vm-label">Sleep perf.</div>
+            <div class="vm-val c">91%</div>
+          </div>
+        </div>
+        <div class="vitals-foot">
+          <span class="live-badge"><span class="live-dot"></span>Live sync</span>
+          <button class="btn-ghost">Update vitals</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP CARDS -->
+  <div>
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Your Suite</div>
+        <div class="section-title">Featured Apps</div>
+      </div>
+    </div>
+    <div class="nft-grid">
+
+      <a class="nft-card" href="finance.html">
+        <div class="card-art art-finance">
+          <span class="card-emoji">💰</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Finance</div>
+          <div class="card-tag">Net worth · subs · orders · wishlist</div>
+          <div class="card-footer">
+            <div>
+              <div class="card-stat-label">Net Worth</div>
+              <div class="card-stat-value">CHF —</div>
+            </div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="nft-card" href="gym.html">
+        <div class="card-art art-gym">
+          <span class="card-emoji">🏋️</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Gym</div>
+          <div class="card-tag">Progressive overload coach</div>
+          <div class="card-footer">
+            <div>
+              <div class="card-stat-label">Today</div>
+              <div class="card-stat-value">Log workout</div>
+            </div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="nft-card" href="supplements.html">
+        <div class="card-art art-supps">
+          <span class="card-emoji">💊</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Supplements</div>
+          <div class="card-tag">Your stack + smart recommendations</div>
+          <div class="card-footer">
+            <div>
+              <div class="card-stat-label">Taken today</div>
+              <div class="card-stat-value">5/7</div>
+            </div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="nft-card" href="whoop.html">
+        <div class="card-art art-fitness">
+          <span class="card-emoji">🔋</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Fitness Band</div>
+          <div class="card-tag">Whoop · Fitbit · Apple Watch sync</div>
+          <div class="card-footer">
+            <div>
+              <div class="card-stat-label">Recovery</div>
+              <div class="card-stat-value">76%</div>
+            </div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="nft-card" href="water.html">
+        <div class="card-art art-water">
+          <span class="card-emoji">💧</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Water</div>
+          <div class="card-tag">Daily hydration target</div>
+          <div class="card-footer">
+            <div>
+              <div class="card-stat-label">Today</div>
+              <div class="card-stat-value">4 drinks</div>
+            </div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="nft-card" href="creator.html">
+        <div class="card-art art-creator">
+          <span class="card-emoji">🎬</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Creator</div>
+          <div class="card-tag">Schedule · accounts · analytics</div>
+          <div class="card-footer">
+            <div>
+              <div class="card-stat-label">Schedule</div>
+              <div class="card-stat-value">Open</div>
+            </div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="nft-card" href="goals.html">
+        <div class="card-art art-goals">
+          <span class="card-emoji">🎯</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Goals</div>
+          <div class="card-tag">Goals &amp; streaks</div>
+          <div class="card-footer">
+            <div>
+              <div class="card-stat-label">Active</div>
+              <div class="card-stat-value">Track</div>
+            </div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="nft-card" href="progress.html">
+        <div class="card-art art-progress">
+          <span class="card-emoji">📈</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Progress</div>
+          <div class="card-tag">Photos &amp; measurements</div>
+          <div class="card-footer">
+            <div>
+              <div class="card-stat-label">Today</div>
+              <div class="card-stat-value">Log weight</div>
+            </div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+      <a class="nft-card" href="macros.html">
+        <div class="card-art art-macros">
+          <span class="card-emoji">🍳</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Macros</div>
+          <div class="card-tag">Protein · carbs · fat</div>
+          <div class="card-footer">
+            <div>
+              <div class="card-stat-label">Today</div>
+              <div class="card-stat-value">Log food</div>
+            </div>
+            <div class="card-arrow">↗</div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
