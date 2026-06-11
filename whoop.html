@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -536,7 +536,7 @@ function coachHtml(d) {
   } else if (d.recovery != null && d.recovery >= 80) {
     tips.unshift({ strong: 'Recovery ' + Math.round(d.recovery) + '%. Green light to push.', rest: ' Stack the hardest training or cognitive session inside the peak window.' });
   }
-  if (tips.length === 0) tips.push({ strong: 'Building your baseline.', rest: " Need 7+ days of valid readings before personalized coaching kicks in. You're at " + d.daysAvailable + ' now.' });
+  if (tips.length === 0) tips.push({ strong: 'Building your baseline.', rest: " Need 7+ days of valid readings before personalized coaching kicks in. you&apos;re at " + d.daysAvailable + ' now.' });
 
   const lis = tips.slice(0, 3).map(t => '<li><span class="coachMark" aria-hidden>✦</span><div><strong>' + esc(t.strong) + '</strong><span>' + esc(t.rest) + '</span></div></li>').join('');
   return '<div class="coachCard"><div class="cardHead"><span class="serifTitle">How to improve today</span></div><ul class="coachList">' + lis + '</ul></div>';
@@ -582,8 +582,8 @@ function clearFitbitData() {
 }
 
 /* ---- Apple Health (manual entry, tagged Apple Watch) ----
- * Apple HealthKit has no web API -- a browser can't read it directly -- so the
- * honest path is the same one the dashboard uses: the user copies today's
+ * Apple HealthKit has no web API -- a browser can&apos;t read it directly -- so the
+ * honest path is the same one the dashboard uses: the user copies today&apos;s
  * numbers in by hand, and they publish into the suite under HEALTH_KEY. */
 let appleData = null;     // saved manual snapshot, or null
 let editingApple = false; // true while the entry form is open over saved data
@@ -722,7 +722,7 @@ function appleFormHtml() {
   const a = appleData || {};
   const v = (k) => (a[k] != null ? a[k] : '');
   const savedNote = appleData ? '<p class="connectSub">Editing your saved Apple Watch readings.</p>' : '';
-  return '<p class="connectIntro">Add today's <em>recovery</em>, <em>sleep</em> &amp; <em>HRV</em> from Apple Health. They feed the same dashboard and supplement picks as Whoop.</p>'
+  return '<p class="connectIntro">Add today&apos;s <em>recovery</em>, <em>sleep</em> &amp; <em>HRV</em> from Apple Health. They feed the same dashboard and supplement picks as Whoop.</p>'
     + savedNote
     + '<div class="fieldGrid">'
     + appleFieldHtml('a-rec', 'Recovery / readiness %', '--', v('recovery'), 'min="0" max="100" inputmode="numeric"')
@@ -732,7 +732,7 @@ function appleFormHtml() {
     + appleFieldHtml('a-strain', 'Strain (0-21, optional)', '--', v('strain'), 'min="0" max="21" step="0.1" inputmode="decimal"')
     + appleFieldHtml('a-target', 'Sleep target (hours)', '8', (a.sleepTargetHours != null ? a.sleepTargetHours : 8), 'min="4" max="12" step="0.5" inputmode="decimal"', true)
     + '</div>'
-    + '<p class="setupNote"><strong>Setup note:</strong> Apple Health has no web API -- a browser can't read HealthKit directly. Open the Health app, copy today's <em>HRV</em>, <em>resting HR</em> &amp; <em>time asleep</em> in here. Saved into the suite tagged <strong>Apple Watch</strong>.</p>'
+    + '<p class="setupNote"><strong>Setup note:</strong> Apple Health has no web API -- a browser can&apos;t read HealthKit directly. Open the Health app, copy today&apos;s <em>HRV</em>, <em>resting HR</em> &amp; <em>time asleep</em> in here. Saved into the suite tagged <strong>Apple Watch</strong>.</p>'
     + '<div class="formActions">'
     + (appleData ? '<button type="button" class="btn btn-link" data-action="remove-apple">remove</button>' : '')
     + '<button type="button" class="btn btn-primary" data-action="save-apple">Save readings</button></div>';
@@ -858,6 +858,7 @@ applyTheme(currentTheme);
 <script src="db.js?v=15"></script>
 </body>
 </html>
+
 
 
 
