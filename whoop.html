@@ -845,8 +845,8 @@ applyTheme(currentTheme);
     const w = q.get('whoop'), f = q.get('fitbit');
     if (w || f) {
       history.replaceState(null, '', location.pathname);
-      if (w === 'error' || w === 'denied') alert('Whoop connection didn't complete -- check the host's WHOOP keys & redirect URL (WHOOP_SETUP.md).');
-      if (f === 'error' || f === 'denied') alert('Fitbit connection didn't complete -- check the host's FITBIT keys & redirect URL (FITBIT_SETUP.md).');
+      if (w === 'error' || w === 'denied') alert('Whoop connection didn&apos;t complete -- check the host&apos;s WHOOP keys & redirect URL (WHOOP_SETUP.md).');
+      if (f === 'error' || f === 'denied') alert('Fitbit connection didn&apos;t complete -- check the host&apos;s FITBIT keys & redirect URL (FITBIT_SETUP.md).');
       if (f === 'connected') connectSource = 'fitbit';
     }
   } catch (e) {}
@@ -858,6 +858,7 @@ applyTheme(currentTheme);
 <script src="db.js?v=15"></script>
 </body>
 </html>
+
 
 
 
