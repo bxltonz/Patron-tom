@@ -157,7 +157,8 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-ui), -ap
 .artCreator  { background: linear-gradient(145deg,#140008,#280015,#3A001E); box-shadow: inset 0 0 50px rgba(255,60,120,0.08); }
 .artGoals    { background: linear-gradient(145deg,#100C00,#201800,#2E2400); box-shadow: inset 0 0 50px rgba(255,200,0,0.07); }
 .artProgress { background: linear-gradient(145deg,#001A10,#002C1C,#004028); box-shadow: inset 0 0 50px rgba(60,240,160,0.07); }
-.artMacros   { background: linear-gradient(145deg,#120800,#201000,#2C1800); box-shadow: inset 0 0 50px rgba(255,160,0,0.07); }
+.artMacros    { background: linear-gradient(145deg,#120800,#201000,#2C1800); box-shadow: inset 0 0 50px rgba(255,160,0,0.07); }
+.artCaffeine  { background: linear-gradient(145deg,#080300,#130800,#1E0D00); box-shadow: inset 0 0 50px rgba(200,120,30,0.09); }
 /* daylight: override dark art area with neutral */
 [data-theme="daylight"] .cardArt { background: var(--surface); }
 
@@ -286,6 +287,7 @@ const APPS = [
   { file: 'goals.html',       name: 'Goals',       tag: 'Goals & streaks',                       icon: '🎯' },
   { file: 'progress.html',    name: 'Progress',    tag: 'Photos & measurements',                 icon: '📈' },
   { file: 'macros.html',      name: 'Macros',      tag: 'Protein · carbs · fat',                 icon: '🍳' },
+  { file: 'caffeine.html',   name: 'Caffeine',   tag: 'Track intake · timing · crash',         icon: '☕' },
 ];
 
 /* ============================================================
@@ -452,7 +454,8 @@ function statFor(file){
 const ART_CLASS = {
   'finance.html':'artFinance','gym.html':'artGym','supplements.html':'artSupps',
   'whoop.html':'artFitness','water.html':'artWater','creator.html':'artCreator',
-  'goals.html':'artGoals','progress.html':'artProgress','macros.html':'artMacros'
+  'goals.html':'artGoals','progress.html':'artProgress','macros.html':'artMacros',
+  'caffeine.html':'artCaffeine'
 };
 function cardHtml(a){
   const st = statFor(a.file);
